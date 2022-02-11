@@ -1,0 +1,17 @@
+.profile__avatar {
+  max-width: 130px; /* Проверил по разному, больше не сжимается при длинном тексте, и не расширяется при маленьком   */
+  height: 130px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin-right: 30px;
+  object-fit: cover;
+}
+
+
+@media screen and (max-width: 897px) {
+  .profile__avatar {
+    margin-right: 0;
+    min-width: 120px;
+    height: 120px;
+  }
+}

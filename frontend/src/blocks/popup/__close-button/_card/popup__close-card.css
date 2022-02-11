@@ -1,0 +1,23 @@
+.popup__close-card {
+  position: relative;
+  bottom: 16px;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  max-width: 32px;
+  max-height: 32px;
+  align-self: flex-end;
+  left: 40px;
+}
+
+.popup__close-card:hover {
+  opacity: 0.6;
+}
+
+@media screen and (max-width: 897px) {
+  .popup__close-card {
+    left: 0;
+    max-width: 20px;
+    max-height: 20px;
+  }
+}

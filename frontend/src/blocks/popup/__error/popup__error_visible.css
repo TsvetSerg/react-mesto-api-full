@@ -1,0 +1,30 @@
+.popup__error_visible {
+  border-top: 1px solid rgba(255, 0, 0, 1);
+  color: red;
+  max-width: 358px;
+  min-width: 359px;
+  font-size: 12px;
+  line-height: 15px;
+  margin-left: 36px;
+  padding-top: 5px;
+  margin-top: -25px;
+  margin-bottom: 13px;
+}
+
+.popup__error_visible:last-of-type {
+  margin-top: -45px;
+  margin-bottom: 31px;
+}
+
+@media screen and (max-width: 897px) {
+  .popup__error_visible {
+    max-width: 238px;
+    min-width: 238px;
+    margin-left: 22px;
+    margin-right: 22px;
+  }
+
+  .popup__error_visible:last-of-type {
+    margin-top: -40px;
+  }
+}

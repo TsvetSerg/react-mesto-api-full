@@ -1,0 +1,15 @@
+.element__image {
+  width: 100%;
+  max-width: 282px;
+  height: 282px;
+  object-fit: cover;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  display: block;
+  transition: 1s;
+  cursor: pointer;
+}
+
+.element__image:hover {
+  transform: scale(1.1);
+}
