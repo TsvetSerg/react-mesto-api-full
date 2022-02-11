@@ -1,8 +1,9 @@
 .header {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  justify-content: space-between;
   width: calc(100% - (200px * 2));
-  align-self: stretch;
+  /* align-self: stretch; */
   margin: auto;
   margin-bottom: 36px;
   border-bottom: rgb(84,84,84, 0.7) solid 1px;

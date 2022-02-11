@@ -90,7 +90,7 @@ class Api {
 }
 
 const apiClass = new Api({                             // записываем стартовый экземпляп
-  baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-29',       // Вообще где то в теории я читал что в React.js пишут с большой буквы или я что то путаю?
+  baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-29',
   headers: {
     authorization: 'dea64c58-8b87-4560-8045-05c229ce594b',
     'Content-Type': 'application/json'

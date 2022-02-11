@@ -1,0 +1,16 @@
+.header__botton {
+  appearance: none;
+  border: none;
+  margin: 0;
+  padding: 0;
+  color: white;
+  background-color: black;
+  cursor: pointer;
+  font-size: 18px;
+  line-height: 22px;
+  margin-left: 24px;
+}
+
+.header__botton:hover {
+  opacity: 0.6;
+}

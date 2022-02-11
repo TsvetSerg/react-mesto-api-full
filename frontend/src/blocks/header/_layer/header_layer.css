@@ -1,0 +1,8 @@
+.header_layer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  /* margin-left: 517px; */
+  margin: 0;
+  padding: 0;
+}

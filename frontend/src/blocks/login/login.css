@@ -1,0 +1,9 @@
+.login {
+  /* border: 1px solid white; */
+  display: flex;
+  flex-direction: column;
+  width: calc(100% - (200px * 2));
+  align-self: stretch;
+  margin: auto;
+  margin-top: 24px;
+}

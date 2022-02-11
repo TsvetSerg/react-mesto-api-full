@@ -10,6 +10,12 @@ import CurrentUserContext from '../contexts/CurrentUserContext'
 import EditProfilePopup from './EditProfilePopup'
 import EditAvatarPopup from './EditAvatarPopup'
 import AddPlacePopup from './AddPlacePopup'
+import Login from './Login'
+import Register from './Register';
+import { Route, Switch, useHistory } from 'react-router-dom';
+import ProtectedRoute from './ProtectedRoute';
+import * as auth from './utils/auth';
+import InfoTooltip from './InfoTooltip';
 
 function App() {
 
@@ -20,8 +26,15 @@ function App() {
   const [selectedCard, setSelectedCard] = React.useState({name: '', link: ''});
   const [currentUser, setCurrentUser] = React.useState({});
   const [currentCard, setCurrentCard] = React.useState([]);
+  const [loggedIn, setLoggedIn] = React.useState(false);
+  const [infoUser, setInfoUser] = React.useState('')
+  const [error, setError] = React.useState(false)
+  const [confirmation, setConfirmation] = React.useState(false)
+
+  const history = useHistory();
 
   React.useEffect(() => {
+    handelTokenCheck();
     Promise.all([apiClass.getInfoUser(), apiClass.getInitialCards()])
       .then(([info, cards]) => {
         setCurrentUser(info)
@@ -32,6 +45,31 @@ function App() {
       })
     }, [])
 
+
+  function handelTokenCheck() {         // Проверяем и сохроняем токен
+    const token = localStorage.getItem('token');
+    if (token) {
+      auth.getToken(token)
+      .then((getInfo) => {
+        setLoggedIn(true);
+        history.push('/')
+        return setInfoUser(getInfo)
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+    }
+  }
+
+  function handelTokenRemove() {        // Функция выхода из аккаунта
+    localStorage.removeItem('token');
+    setLoggedIn(false)
+    history.push('/')
+  }
+
+  function handelLogin() {
+    setLoggedIn(true)
+  }
 
 
   function handleCardLike(card) {                 // Функуция поосстановки лайков
@@ -100,6 +138,37 @@ function App() {
     })
   }
 
+  function hendleLoginAuth(username, password) {
+    auth.authorize({
+      identifier: username,
+      password: password
+    }).then((data) => {
+      if (data.token) {
+        handelLogin();
+        history.push('/');
+        handelTokenCheck(); // проверяем токен при монтировании
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+    })
+  }
+
+  function handleRegistr(password, email) {
+    auth.register({
+      password: password,
+      email: email
+    })
+    .then(() => {
+      setConfirmation(true);
+      setError(true);
+    })
+    .catch(() => {
+      setConfirmation(true);
+      setError(false);
+    })
+  }
+
   function openAddPopup() {
     setIsAddPlacePopupOpen(true)
   }
@@ -114,54 +183,91 @@ function App() {
     setIsEditProfilePopupOpen(false)
     setIsEditAvatarPopupOpen(false)
     setSelectedCard({name: '', link: ''})
+    setConfirmation(false)
   }
 
   function handleCardClick(item) {
     setSelectedCard(item)
   }
 
-
   return (
 
-<CurrentUserContext.Provider value={currentUser}>
   <div className="page">
 
-  <Header />
-  <Main
-    onAddPlace  = {openAddPopup}
-    onEditProfile = {openProfilePopup}
-    onEditAvatar = {openAvatarPopup}
-    onCardClick = {handleCardClick}
-    card = {currentCard}
-    onCardLike = {handleCardLike}
-    onCardDelete = {handleCardDelete}
-  />
-  <Footer />
-
-  <EditProfilePopup
-    isOpen={isEditProfilePopupOpen}
-    onClose={closeAllPopups}
-    onUpdateUser = {handleUpdateUser}
+  <Header
+    handelTokenRemove = {handelTokenRemove}
+    email = {infoUser.email}
+    loggedIn = {loggedIn}
   />
 
-  <EditAvatarPopup
-    isOpen={isEditAvatarPopupOpen}
-    onClose={closeAllPopups}
-    onUpdateAvatar = {handleUpdateAvatar}
-    />
-
-  <AddPlacePopup
-    isOpen = {isAddPlacePopupOpen}
+  <InfoTooltip
+    isOpen = {confirmation}
     onClose = {closeAllPopups}
-    onUpdateCard = {handleAddPlaceSubmit}
+    errorMassage = {error}
   />
 
-  <ImagePopup
-    card = {selectedCard}
-    onClose = {closeAllPopups}
-  />
+  <Switch>
+
+  <ProtectedRoute
+      exact path = "/"
+      loggedIn = {loggedIn}
+      Component = {(
+      <CurrentUserContext.Provider value={currentUser}>
+
+
+
+      <Main
+        onAddPlace  = {openAddPopup}
+        onEditProfile = {openProfilePopup}
+        onEditAvatar = {openAvatarPopup}
+        onCardClick = {handleCardClick}
+        card = {currentCard}
+        onCardLike = {handleCardLike}
+        onCardDelete = {handleCardDelete}
+      />
+      <ImagePopup
+        card = {selectedCard}
+        onClose = {closeAllPopups}
+      />
+      <AddPlacePopup
+        isOpen = {isAddPlacePopupOpen}
+        onClose = {closeAllPopups}
+        onUpdateCard = {handleAddPlaceSubmit}
+      />
+
+      <EditAvatarPopup
+        isOpen={isEditAvatarPopupOpen}
+        onClose={closeAllPopups}
+        onUpdateAvatar = {handleUpdateAvatar}
+      />
+
+      <EditProfilePopup
+        isOpen={isEditProfilePopupOpen}
+        onClose={closeAllPopups}
+        onUpdateUser = {handleUpdateUser}
+      />
+
+      <Footer />
+
+      </CurrentUserContext.Provider>
+    )}/>
+
+    <Route path="/sign-in">
+      <Login
+      hendleLogin = {hendleLoginAuth}
+      />
+    </Route>
+
+    <Route path="/sign-up">
+      <Register
+        handleRegistr = {handleRegistr}
+      />.
+    </Route>
+
+
+  </Switch>
+
   </div>
-</CurrentUserContext.Provider>
   );
 }
 
