@@ -52,7 +52,7 @@ export const getToken = (token) => {
     method: 'GET',
     headers: {
       "Content-Type": "application/json",
-      "authorization" : `${token}`
+      "Authorization" : `Bearer ${token}`
     }
   })
   .then((res) => {
