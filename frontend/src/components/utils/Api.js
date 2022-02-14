@@ -87,6 +87,12 @@ class Api {
     .then(this._checked)
   }
 
+  setToken(token) {
+    this._headers = {
+      'Authorization': `Bearer ${token}`,
+      'Content-Type': 'application/json'
+    }
+  }
 }
 
 const apiClass = new Api({                             // записываем стартовый экземпляп

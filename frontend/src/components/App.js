@@ -49,6 +49,7 @@ function App() {
   function handelTokenCheck() {         // Проверяем и сохроняем токен
     const token = localStorage.getItem('token');
     if (token) {
+      apiClass.setToken(token)
       auth.getToken(token)
       .then((getInfo) => {
         setLoggedIn(true);
