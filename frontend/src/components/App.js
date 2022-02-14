@@ -35,7 +35,9 @@ function App() {
 
   React.useEffect(() => {
     handelTokenCheck();
-    Promise.all([apiClass.getInfoUser(), apiClass.getInitialCards()])
+    const token = localStorage.getItem('token');
+    if (token) {
+      Promise.all([apiClass.getInfoUser(), apiClass.getInitialCards()])
       .then(([info, cards]) => {
         setCurrentUser(info)
         setCurrentCard(cards)
@@ -43,7 +45,7 @@ function App() {
       .catch((err) => {
         console.log(err);
       })
-    }, [])
+    }}, [])
 
 
   function handelTokenCheck() {         // Проверяем и сохроняем токен
