@@ -58,7 +58,6 @@ function App() {
         setLoggedIn(true);
         console.log('asd', getInfo)
         history.push('/')
-        card = {currentCard}
         return setCurrentUser(getInfo)
       })
       .catch((err) => {
