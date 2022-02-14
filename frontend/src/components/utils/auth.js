@@ -1,5 +1,5 @@
 
-export const baseUrl = 'https://auth.nomoreparties.co';
+export const baseUrl = 'https://api.mestoproject.students.nomoredomains.xyz';
 
 function checked(res) {
   if (res.ok) {
