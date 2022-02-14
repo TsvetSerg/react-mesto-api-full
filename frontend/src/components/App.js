@@ -48,6 +48,7 @@ function App() {
 
   function handelTokenCheck() {         // Проверяем и сохроняем токен
     const token = localStorage.getItem('token');
+
     if (token) {
       apiClass.setToken(token)
       auth.getToken(token)
@@ -55,7 +56,7 @@ function App() {
         setLoggedIn(true);
         console.log('asd', getInfo)
         history.push('/')
-        return setInfoUser(getInfo)
+        return setCurrentUser(getInfo)
       })
       .catch((err) => {
         console.log(err);
@@ -198,7 +199,7 @@ function App() {
 
   <Header
     handelTokenRemove = {handelTokenRemove}
-    email = {infoUser.email}
+    email = {currentUser.email}
     loggedIn = {loggedIn}
   />
 
