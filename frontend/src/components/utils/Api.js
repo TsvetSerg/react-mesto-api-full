@@ -90,7 +90,7 @@ class Api {
 }
 
 const apiClass = new Api({                             // записываем стартовый экземпляп
-  baseUrl: 'https://api.mestoproject.students.nomoredomains.xyz',
+  baseUrl: 'http://api.mestoproject.students.nomoredomains.xyz',
   headers: {
     // authorization: 'dea64c58-8b87-4560-8045-05c229ce594b',
     'Content-Type': 'application/json'
