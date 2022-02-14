@@ -53,6 +53,7 @@ function App() {
       .then((getInfo) => {
         setLoggedIn(true);
         history.push('/')
+        console.log('asd', getInfo)
         return setInfoUser(getInfo)
       })
       .catch((err) => {
