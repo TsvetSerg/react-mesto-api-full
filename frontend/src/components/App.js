@@ -52,8 +52,8 @@ function App() {
       auth.getToken(token)
       .then((getInfo) => {
         setLoggedIn(true);
-        history.push('/')
         console.log('asd', getInfo)
+        history.push('/')
         return setInfoUser(getInfo)
       })
       .catch((err) => {
