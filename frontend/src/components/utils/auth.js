@@ -3,7 +3,7 @@ export const baseUrl = 'https://api.mestoproject.students.nomoredomains.xyz';
 
 function checked(res) {
   if (res.ok) {
-    console.log('asd', res.json())
+    // console.log('asd', res.json())
     return Promise.resolve(res.json());
   }
   return Promise.reject(res.status)
