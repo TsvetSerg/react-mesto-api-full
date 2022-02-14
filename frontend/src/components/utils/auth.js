@@ -14,7 +14,7 @@ function checked(res) {
   if (res.ok) {
     return res.json().then(jsonData => {
       console.log("GotJsonData", jsonData)
-      Promise.resolve(jsonData);
+      return Promise.resolve(jsonData);
     });
   }
   return Promise.reject(res.status)
