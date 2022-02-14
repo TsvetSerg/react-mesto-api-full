@@ -92,7 +92,7 @@ class Api {
 const apiClass = new Api({                             // записываем стартовый экземпляп
   baseUrl: 'https://api.mestoproject.students.nomoredomains.xyz',
   headers: {
-    'authorization': `${localStorage.getItem('token')}`,
+    'Authorization': `Bearer ${localStorage.getItem('token')}`,
     'Content-Type': 'application/json'
   }
 });
