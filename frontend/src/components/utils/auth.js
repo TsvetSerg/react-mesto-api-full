@@ -70,9 +70,9 @@ export const getToken = (token) => {
   .then((res) => {
     return checked(res)
   })
-  .then(({data}) => {
-    return (data)
-  })
+  // .then(({data}) => {
+  //   return (data)
+  // })
 }
 
 
