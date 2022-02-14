@@ -54,11 +54,11 @@ function App() {
     if (token) {
       apiClass.setToken(token)
       auth.getToken(token)
-      .then((getInfo, cards) => {
+      .then((getInfo, cardInfo) => {
         setLoggedIn(true);
         console.log('asd', getInfo)
         history.push('/')
-        setCurrentCard(cards)
+        setCurrentCard(cardInfo)
         return setCurrentUser(getInfo)
       })
       .catch((err) => {
