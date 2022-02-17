@@ -61,7 +61,7 @@ class Api {
   }
 
   putLikeCard(cardId) {     // ООтправляем данные что пооставилии лайк
-    return fetch(this._url + `/cards/${cardId}/likes`, {
+    return fetch(this._url + `/cards/likes/${cardId}`, {
       method: 'PUT',
       headers: this._headers
     })
@@ -69,7 +69,7 @@ class Api {
   }
 
   deleteLikeCard(cardId) {     // Удаляем данные о лайке с сервера
-    return fetch(this._url + `/cards/${cardId}/likes`, {
+    return fetch(this._url + `/cards/likes/${cardId}`, {
       method: 'DELETE',
       headers: this._headers
     })
