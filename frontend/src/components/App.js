@@ -83,7 +83,7 @@ function App() {
     if (!isLiked) {
       apiClass.putLikeCard(card._id)
     .then((newCard) => {
-      setCurrentCard((state) => state.map((c) => c._id === card._id ? newCard : c));
+      setCurrentCard((state) => state.map((c) => c._id === card._id ? newCard.data : c));
     })
     .catch((err) => {
       console.log(err);
@@ -91,7 +91,7 @@ function App() {
     } else {
       apiClass.deleteLikeCard(card._id)
       .then((newCard) => {
-        setCurrentCard((state) => state.map((c) => c._id === card._id ? newCard : c));
+        setCurrentCard((state) => state.map((c) => c._id === card._id ? newCard.data : c));
       })
       .catch((err) => {
         console.log(err);
