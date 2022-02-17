@@ -65,7 +65,9 @@ app.use(auth);
 
 app.use(routes);
 app.use(express.json());
+
 // app.use(errorLogger);
+
 app.use(errors());
 app.use(handelError);
 
