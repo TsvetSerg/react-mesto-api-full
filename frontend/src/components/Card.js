@@ -31,12 +31,12 @@ function Card(props) {
   return (
       <article className="element">
         <div className={cardDeleteButtonClassName} onClick={handleDeletClick}></div>
-        <img className="element__image" src={props.link} alt={props.name} onClick={handleCardClick}/>
+        <img className="element__image" src={props.card.link} alt={props.card.name} onClick={handleCardClick}/>
         <div className="element__rectangle">
-          <h2 className="element__title">{props.name}</h2>
+          <h2 className="element__title">{props.card.name}</h2>
           <div className="element__wrapper">
             <div className={cardLikeButtonClassName} onClick={handleLikeClick}></div>
-            <p className="element__liked_num">{props.likes}</p>
+            <p className="element__liked_num">{props.card.likes.length}</p>
           </div>
         </div>
       </article>

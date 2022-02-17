@@ -36,13 +36,13 @@ function Main(props) {
       {props.card.map((cards) => (
         <Card
         key = {cards._id}
-        name = {cards.name}
-        link = {cards.link}
+        // name = {cards.name}
+        // link = {cards.link}
         onCardClick = {props.onCardClick}
         card = {cards}
         onCardLike = {props.onCardLike}
         onCardDelete = {props.onCardDelete}
-        likes = {cards.likes.length}
+        // likes = {cards.likes.length}
         />
       ))}
       </section>
