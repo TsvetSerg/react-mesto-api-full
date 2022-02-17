@@ -2,6 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const { celebrate, Joi, errors } = require('celebrate');
+const cors = require('cors');
 const regExp = require('./method/regexp');
 const routes = require('./routes');
 const { postUser, login } = require('./controllers/users');
@@ -20,15 +21,20 @@ mongoose.connect('mongodb://localhost:27017/mestodb', {
   // useFindAndModify: false,
 });
 
-app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Headers', '*');
-  res.header('Access-Control-Allow-Origin', '*');
-  res.header('Access-Control-Allow-Methods', 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS');
-  if (req.method === 'OPTIONS') {
-    res.send(200);
-  }
-  next();
-});
+// app.use((req, res, next) => {
+//   res.header('Access-Control-Allow-Headers', '*');
+//   res.header('Access-Control-Allow-Origin', '*');
+//   res.header('Access-Control-Allow-Methods', 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS');
+//   if (req.method === 'OPTIONS') {
+//     res.send(200);
+//   }
+//   next();
+// });
+
+app.use(cors({
+  origin: 'http://mestoproject.students.nomoredomains.xyz',
+  credentials: true,
+}));
 
 app.use(requestLogge);
 
