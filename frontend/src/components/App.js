@@ -56,7 +56,6 @@ function App() {
       auth.getToken(token)
       .then((getInfo, cardInfo) => {
         setLoggedIn(true);
-        console.log('asd', getInfo)
         history.push('/')
         return setCurrentUser(getInfo)
       })
