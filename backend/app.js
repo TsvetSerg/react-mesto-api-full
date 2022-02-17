@@ -1,8 +1,8 @@
+require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const { celebrate, Joi, errors } = require('celebrate');
-// const cors = require('cors');
 const regExp = require('./method/regexp');
 const routes = require('./routes');
 const { postUser, login } = require('./controllers/users');
@@ -20,6 +20,7 @@ mongoose.connect('mongodb://localhost:27017/mestodb', {
   // useCreateIndex: true,
   // useFindAndModify: false,
 });
+console.log(process.env.NODE_ENV);
 
 app.use((req, res, next) => {
   res.header('Access-Control-Allow-Headers', '*');
@@ -30,11 +31,6 @@ app.use((req, res, next) => {
   }
   next();
 });
-
-// app.use(cors({
-//   origin: 'http://mestoproject.students.nomoredomains.xyz',
-//   credentials: true,
-// }));
 
 app.use(requestLogger);
 
