@@ -36,7 +36,7 @@ app.use(cors({
   credentials: true,
 }));
 
-app.use(requestLogge);
+// app.use(requestLogge);
 
 app.get('/crash-test', () => {
   setTimeout(() => {
@@ -65,7 +65,7 @@ app.use(auth);
 
 app.use(routes);
 app.use(express.json());
-app.use(errorLogger);
+// app.use(errorLogger);
 app.use(errors());
 app.use(handelError);
 
