@@ -8,7 +8,7 @@ const routes = require('./routes');
 const { postUser, login } = require('./controllers/users');
 const auth = require('./middlewares/auth');
 const handelError = require('./middlewares/handelError');
-// const { requestLogge, errorLogger } = require('./middlewares/logger');
+const { requestLogger, errorLogger } = require('./middlewares/logger');
 
 const { PORT = 3000 } = process.env;
 const app = express();
@@ -36,7 +36,7 @@ app.use((req, res, next) => {
 //   credentials: true,
 // }));
 
-// app.use(requestLogge);
+app.use(requestLogger);
 
 app.get('/crash-test', () => {
   setTimeout(() => {
@@ -66,7 +66,7 @@ app.use(auth);
 app.use(routes);
 app.use(express.json());
 
-// app.use(errorLogger);
+app.use(errorLogger);
 
 app.use(errors());
 app.use(handelError);
