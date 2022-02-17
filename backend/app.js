@@ -20,8 +20,6 @@ mongoose.connect('mongodb://localhost:27017/mestodb', {
   // useFindAndModify: false,
 });
 
-app.use(requestLogge);
-
 app.use((req, res, next) => {
   res.header('Access-Control-Allow-Headers', '*');
   res.header('Access-Control-Allow-Origin', '*');
@@ -31,6 +29,8 @@ app.use((req, res, next) => {
   }
   next();
 });
+
+app.use(requestLogge);
 
 app.get('/crash-test', () => {
   setTimeout(() => {
