@@ -22,7 +22,7 @@ const postUser = (req, res, next) => { // Создаем пользовател�
       name, about, avatar, email,
     }))
     .catch((err) => {
-      if (err.name === 'MongoServerError' && err.code === 11000) {
+      if (err.code === 11000) {
         next(new ConflictError('Пользователь с данным email уже существует'));
       }
       if (err.name === 'ValidationError') {
@@ -60,11 +60,11 @@ const getUserId = (req, res, next) => { // Получаем пользовате
 
 const updateProfile = async (req, res, next) => { // Обновление профия
   try {
-    const { name, about, avatar } = req.body;
+    const { name, about } = req.body;
 
     const user = await User.findByIdAndUpdate(
       req.user._id,
-      { name, about, avatar },
+      { name, about },
       { new: true, runValidators: true },
     );
     res.status(200).send(user);

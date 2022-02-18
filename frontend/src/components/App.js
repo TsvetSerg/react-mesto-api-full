@@ -45,7 +45,7 @@ function App() {
       .catch((err) => {
         console.log(err);
       })
-    }}, [])
+    }}, [loggedIn])
 
 
   function handelTokenCheck() {         // Проверяем и сохроняем токен

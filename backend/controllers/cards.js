@@ -32,8 +32,11 @@ const deleteCards = (req, res, next) => { // Удаляем карточку
     .orFail(() => new Error('NotFound'))
     .then((card) => {
       if (req.user._id.toString() === card.owner.toString()) {
-        card.remove();
-        res.status(200).send({ message: 'Карточка удалена.' });
+        card.remove()
+          .then(() => { // если я все правильно понял, то должно быть вот так
+            res.status(200).send({ message: 'Карточка удалена.' });
+          })
+          .catch(next);
       } else {
         throw new Error('AccessError');
       }
